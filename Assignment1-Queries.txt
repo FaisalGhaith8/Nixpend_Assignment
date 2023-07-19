@@ -1,0 +1,42 @@
+--Assignment #1 Part 1:
+SELECT 
+    M.Medication_ID,
+    M.Expiration_Date,
+    COUNT(MP.Patient_ID) AS Patients_Taking_Medication,
+    CASE 
+        WHEN M.Expiration_Date > CURRENT_DATE() THEN 'Active'
+        WHEN M.Expiration_Date <= CURRENT_DATE() THEN 'Expired'
+        ELSE 'Unknown'
+    END AS Medication_Status
+FROM 
+    MEDICATION M
+LEFT JOIN 
+    MEDICATION_PRESCRIBED MP ON M.Medication_ID = MP.Medication_ID
+GROUP BY 
+    M.Medication_ID;
+	
+--Assignment #1 Part 2:
+SELECT 
+	DEP.Department_ID,
+    D.Doctor_ID,
+	W.Name AS 'Doctor Name',
+    DP.Time AS 'Time Attended,
+    P.Patient_ID,
+    P.Name AS 'Patient Name',
+    P.Age
+FROM 
+    DOCTOR D
+INNER JOIN 
+    DEPARTMENT DEP ON D.Department_ID = DEP.Department_ID
+INNER JOIN 
+    WORKER W ON D.D_Worker_ID = W.Worker_ID
+INNER JOIN 
+    DOCTOR_PATIENT DP ON D.Doctor_ID = DP.Doctor_ID
+INNER JOIN 
+    PATIENT P ON DP.Patient_ID = P.Patient_ID
+WHERE 
+    P.Age > 12
+    AND YEAR(DP.Time_Attend) <> 2022
+ORDER BY 
+    W.Name DESC,
+    P.Name ASC;

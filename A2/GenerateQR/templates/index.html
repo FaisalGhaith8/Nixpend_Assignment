@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate QR Code!</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <form id="dataForm">
+        <label for="fullname">Full name:</label>
+        <input type="text" id="fullname" name="fullname" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Phone number:</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <div id="qrcodeContainer"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
